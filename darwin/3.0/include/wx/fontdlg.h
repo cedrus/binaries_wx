@@ -74,7 +74,6 @@ inline bool wxFontDialogBase::Create(wxWindow *parent, const wxFontData *data)
 #if defined( __WXOSX_MAC__ )
 //set to 1 to use native mac font and color dialogs
 #define USE_NATIVE_FONT_DIALOG_FOR_MACOSX 1
-#define USE_NATIVE_FONT_DIALOG_FOR_MACOSX 0  // set to ZERO by Cedrus
 #else
 //not supported on these platforms, leave 0
 #define USE_NATIVE_FONT_DIALOG_FOR_MACOSX 0

@@ -15,7 +15,14 @@
 
 #if wxUSE_VALIDATORS
 
+#include "wx/textentry.h"
 #include "wx/validate.h"
+
+// This header uses std::numeric_limits<>::min/max, but these symbols are,
+// unfortunately, often defined as macros and the code here wouldn't compile in
+// this case, so preventively undefine them to avoid this problem.
+#undef min
+#undef max
 
 #include <limits>
 
@@ -49,7 +56,7 @@ protected:
         m_style = style;
     }
 
-    wxNumValidatorBase(const wxNumValidatorBase& other) : wxValidator()
+    wxNumValidatorBase(const wxNumValidatorBase& other) : wxValidator(other)
     {
         m_style = other.m_style;
     }

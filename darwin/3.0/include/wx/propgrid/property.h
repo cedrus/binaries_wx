@@ -803,6 +803,7 @@ public:
 private:
     wxVector<wxPGChoiceEntry>   m_items;
 
+protected:
     virtual ~wxPGChoicesData();
 };
 
@@ -846,6 +847,10 @@ public:
         {
             m_data = a.m_data;
             m_data->IncRef();
+        }
+        else
+        {
+            Init();
         }
     }
 
@@ -1046,10 +1051,7 @@ public:
               const wxArrayInt& values = wxArrayInt() )
     {
         Free();
-        if ( &values )
-            Add(labels,values);
-        else
-            Add(labels);
+        Add(labels,values);
     }
 
     // Creates exclusive copy of current choices
@@ -2105,7 +2107,7 @@ public:
         m_helpString = helpString;
     }
 
-    void SetLabel( const wxString& label ) { m_label = label; }
+    void SetLabel( const wxString& label );
 
     void SetName( const wxString& newName );
 

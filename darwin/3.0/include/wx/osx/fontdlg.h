@@ -28,8 +28,6 @@
 #define wxOSX_USE_EXPERIMENTAL_FONTDIALOG 1
 #endif
 
-#define wxOSX_USE_EXPERIMENTAL_FONTDIALOG 0 // added by Cedrus
-
 #if wxOSX_USE_EXPERIMENTAL_FONTDIALOG
 
 class WXDLLIMPEXP_CORE wxFontDialog : public wxDialog

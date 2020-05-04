@@ -16,10 +16,10 @@
 #endif /* __cplusplus */
 
 /* fill in with the string wxGetOsDescription() will return */
-#define WXWIN_OS_DESCRIPTION "Darwin 12.1.0 x86_64"
+#define WXWIN_OS_DESCRIPTION "Darwin 19.4.0 x86_64"
 
 /* the installation location prefix from configure */
-#define wxINSTALL_PREFIX "/Users/kkheller/Documents/gitgitgit/SL/one/3_in_1_repo/wx_src/../binaries_wx//built_libs"
+#define wxINSTALL_PREFIX "/Users/ematsak/source/SuperLab/wx_src/../binaries_wx//built_libs"
 
 /* Define to `int' if <sys/types.h> doesn't define.  */
 /* #undef gid_t */
@@ -341,10 +341,16 @@
 #define wxUSE_WEBVIEW_IE 0
 #endif
 
-#if defined(__WXGTK__) || defined(__WXOSX__)
+#if (defined(__WXGTK__) && !defined(__WXGTK3__)) || defined(__WXOSX__)
 #define wxUSE_WEBVIEW_WEBKIT 0
 #else
 #define wxUSE_WEBVIEW_WEBKIT 0
+#endif
+
+#if defined(__WXGTK3__)
+#define wxUSE_WEBVIEW_WEBKIT2 0
+#else
+#define wxUSE_WEBVIEW_WEBKIT2 0
 #endif
 
 
@@ -778,7 +784,7 @@
 /*
  * Define if the compiler supports simple visibility declarations.
  */
-/* #undef HAVE_VISIBILITY */
+#define HAVE_VISIBILITY 1
 
 /*
  * Define if the compiler supports GCC's atomic memory access builtins
@@ -846,7 +852,7 @@
 /*
  * Define if compiler has __thread keyword.
  */
-#define HAVE___THREAD_KEYWORD 1
+/* #undef HAVE___THREAD_KEYWORD */
 /*
  * Define if large (64 bit file offsets) files are supported.
  */
@@ -871,6 +877,11 @@
  * wxWebKitCtrl
  */
 #define wxUSE_WEBKIT 0
+
+/*
+ * wxMediaCtrl on OS X
+ */
+#define wxOSX_USE_QTKIT 0
 
 /*
  * Objective-C class name uniquifying
@@ -1148,7 +1159,7 @@
 #define HAVE_UNSETENV 1
 
 /* Define if you have the <X11/XKBlib.h> header file.  */
-#define HAVE_X11_XKBLIB_H 1
+/* #undef HAVE_X11_XKBLIB_H */
 
 /* Define if you have the <X11/extensions/xf86vmode.h> header file.  */
 /* #undef HAVE_X11_EXTENSIONS_XF86VMODE_H */

@@ -289,7 +289,7 @@ private:
 class WXDLLIMPEXP_PROPGRID wxCursorProperty : public wxEnumProperty
 {
     DECLARE_DYNAMIC_CLASS(wxCursorProperty)
-
+public:
     wxCursorProperty( const wxString& label= wxPG_LABEL,
                       const wxString& name= wxPG_LABEL,
                       int value = 0 );

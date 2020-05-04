@@ -400,7 +400,7 @@ is_cross()  { [ "xno" = "xyes" ]; }
 
 
 # Determine the base directories we require.
-prefix=${input_option_prefix-${this_prefix:-/Users/kkheller/Documents/gitgitgit/SL/one/3_in_1_repo/wx_src/../binaries_wx//built_libs}}
+prefix=${input_option_prefix-${this_prefix:-/Users/ematsak/source/SuperLab/wx_src/../binaries_wx//built_libs}}
 exec_prefix=${input_option_exec_prefix-${input_option_prefix-${this_exec_prefix:-${prefix}}}}
 wxconfdir="${exec_prefix}/lib/wx/config"
 
@@ -945,12 +945,12 @@ bindir="${exec_prefix}/bin"
 [ -z "$output_option_prefix"        ] || echo $prefix
 [ -z "$output_option_exec_prefix"   ] || echo $exec_prefix
 [ -z "$output_option_release"       ] || echo "3.0"
-[ -z "$output_option_version"       ] || echo "3.0.1"
-[ -z "$output_option_version_full"  ] || echo "3.0.1.0"
+[ -z "$output_option_version"       ] || echo "3.0.5"
+[ -z "$output_option_version_full"  ] || echo "3.0.5.0"
 [ -z "$output_option_basename"      ] || echo "wx_osx_cocoau"
-[ -z "$output_option_cc"            ] || echo "clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -mmacosx-version-min=10.7"
-[ -z "$output_option_cxx"           ] || echo "clang++ -std=c++11 -stdlib=libc++  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -mmacosx-version-min=10.7"
-[ -z "$output_option_ld"            ] || echo "clang++ -std=c++11 -stdlib=libc++  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -mmacosx-version-min=10.7 -o"
+[ -z "$output_option_cc"            ] || echo "clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk -mmacosx-version-min=10.13"
+[ -z "$output_option_cxx"           ] || echo "clang++ -std=c++11 -stdlib=libc++  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk -mmacosx-version-min=10.13"
+[ -z "$output_option_ld"            ] || echo "clang++ -std=c++11 -stdlib=libc++  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk -mmacosx-version-min=10.13 -o"
 [ -z "$flag_option_selected_config" ] || echo "$this_config"
 
 for q in $query_options; do
@@ -1025,13 +1025,14 @@ fi
 # Additional configuration for individual library components.
 ldflags_gl=""
 
-ldlibs_base="-lwxregexu-3.0 -lwxtiff-3.0 -lwxjpeg-3.0 -lwxpng-3.0 -lz -lpthread -liconv"
+ldlibs_base="-lwxregexu-3.0 -lwxtiff-3.0 -lwxjpeg-3.0 -lwxpng-3.0 -lz -lpthread -liconv -llzma"
 ldlibs_core=""
 ldlibs_gl="-framework OpenGL -framework AGL"
 ldlibs_html=""
 ldlibs_xml=" -lexpat"
 ldlibs_adv=""
 ldlibs_stc="-lwxscintilla-3.0"
+ldlibs_webview=""
 
 
 # Order the libraries passed to us correctly for static linking.
@@ -1359,25 +1360,25 @@ fi
 
 if [ -n "$output_option_rescomp" ]; then
 
-    case "cat /dev/null \| Rez" in
+    case "cat /dev/null \| " in
       *windres|wrc)
         # Note that with late model windres, we could just insert
         # _include_cppflags here, but use the old notation for now
         # as it is more universally accepted.
         if is_installed; then
-            echo "cat /dev/null \| Rez --include-dir" \
+            echo "cat /dev/null \|  --include-dir" \
                            "${includedir}/wx-3.0" \
-                           "-d __DARWIN__ -t APPL $libdir/libwx_osx_cocoau-3.0.1.r"
+                           "-d __DARWIN__ -t APPL $libdir/libwx_osx_cocoau-3.0.5.r"
         else
-            echo "cat /dev/null \| Rez --include-dir ${includedir}" \
-                           "-d __DARWIN__ -t APPL $libdir/libwx_osx_cocoau-3.0.1.r"
+            echo "cat /dev/null \|  --include-dir ${includedir}" \
+                           "-d __DARWIN__ -t APPL $libdir/libwx_osx_cocoau-3.0.5.r"
         fi
         ;;
 
       # neither rez not emxbind have any specific needs from
       # us, so just output what was determined by configure.
       *)
-        echo cat /dev/null \| Rez -d __DARWIN__ -t APPL $libdir/libwx_osx_cocoau-3.0.1.r
+        echo cat /dev/null \|  -d __DARWIN__ -t APPL $libdir/libwx_osx_cocoau-3.0.5.r
         ;;
     esac
 
